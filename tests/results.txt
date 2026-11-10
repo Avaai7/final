@@ -1,0 +1,1 @@
+Passed in msedge: demo processing; candidates; SSIM; defaults; slider; zoom; manual override; dimension limits; original retention; CSV; ZIP; append; remove; GIF guard; corrupt file; transparency pixel equality; budget status; mobile layout; guide; cancel; clear; no browser errors.

@@ -1,0 +1,311 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>MediaFit — Final Edition</title>
+
+<meta name="description" content="A private media workspace. Compress images and videos, compare formats and understand compression.">
+<meta name="theme-color" content="#0e1726"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"></head><body>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="band">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="4" y="4" width="56" height="56" rx="13" fill="#0E1726" stroke="#4CC9F0" stroke-opacity=".35"/>
+          <rect x="14.5" y="15.5" width="35" height="27" rx="3" fill="none" stroke="#4CC9F0" stroke-width="2.4"/>
+          <path d="M17.5 40 L28 26.5 L35 34.5 L39.5 29.5 L47 40 Z" fill="#4CC9F0"/>
+          <circle cx="42.5" cy="22.5" r="2.6" fill="#F4A261"/>
+          <path d="M24.5 46.5 L32 49.5 L39.5 46.5 M24.5 51 L32 54 L39.5 51" fill="none" stroke="#F4A261" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <div class="brand-name">MediaFit</div>
+          <div class="brand-sub">Final edition · ICT project · Group IT&#8209;2602</div>
+        </div>
+      </div>
+      <div class="appearance-tools"><label class="theme-label" for="theme">Appearance</label><select id="theme" aria-label="Colour theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select><button type="button" class="text-toggle" id="text-toggle" aria-pressed="false">
+        <span class="aa" aria-hidden="true">A+</span> Larger text
+      </button></div>
+    </div>
+
+    <div class="hero">
+      <div>
+        <h1>Less file size.<br><em>More informed choices.</em></h1>
+        <p>Your private workspace for lighter images and videos. Edit, compress, compare and export — with clear explanations and no file uploads.</p>
+      </div>
+      <div class="facts" role="group" aria-label="Key facts">
+        <span class="fact"><b>01</b> Image studio</span>
+        <span class="fact"><b>02</b> Video studio</span>
+        <span class="fact"><b>0</b> uploads</span>
+        <span class="fact"><b>100%</b> on your device</span>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="MediaFit tools">
+      <button type="button" class="tab" role="tab" id="tab-shrink" aria-controls="panel-shrink" aria-selected="true">Image studio</button>
+<button type="button" class="tab" role="tab" id="tab-video" aria-controls="panel-video" aria-selected="false" tabindex="-1">Video studio <span class="new-tag">NEW</span></button>
+      <button type="button" class="tab" role="tab" id="tab-guide" aria-controls="panel-guide" aria-selected="false" tabindex="-1">Format guide</button>
+<button type="button" class="tab" role="tab" id="tab-help" aria-controls="panel-help" aria-selected="false" tabindex="-1">Help &amp; project</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <!-- ================= SHRINK ================= -->
+    <section class="panel" id="panel-shrink" role="tabpanel" aria-labelledby="tab-shrink">
+      <div class="workspace-heading"><div><p class="eyebrow">01 / IMAGE STUDIO</p><h2>A smaller file. A choice you understand.</h2><p>Batch compression, individual edits and an encoding lab for every image.</p></div><span class="local-badge">● Local processing</span></div>
+      <div class="shrink">
+        <div class="rail">
+          <form class="box" id="settings" novalidate>
+            <fieldset>
+              <legend>1. What is it for?</legend>
+              <div class="goal-list">
+                <label class="goal">
+                  <input type="radio" name="goal" id="goal-upload" value="upload" checked>
+                  <span class="goal-title">Send or upload</span>
+                  <span class="goal-hint">≤ 1920 px · ≤ 1 MB each</span>
+                </label>
+                <label class="goal">
+                  <input type="radio" name="goal" id="goal-web" value="web">
+                  <span class="goal-title">Website or blog</span>
+                  <span class="goal-hint">≤ 1600 px · ≤ 300 KB each</span>
+                </label>
+                <label class="goal">
+                  <input type="radio" name="goal" id="goal-keep" value="keep">
+                  <span class="goal-title">Prioritize quality</span>
+                  <span class="goal-hint">full size · high quality · no limit</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="field" style="margin-top:1.1rem">
+              <label for="format">2. Output format</label>
+              <select id="format" aria-describedby="format-help">
+                <option value="auto" selected>Auto (recommended)</option>
+                <option value="webp">WebP</option>
+                <option value="jpeg">JPEG</option>
+                <option value="png">PNG</option>
+              </select>
+              <span class="help" id="format-help">Auto picks a format for each image.</span>
+            </div>
+
+            <details style="margin-top:1.1rem">
+              <summary>Fine-tune settings</summary>
+              <div class="field">
+                <label for="max-side">Longest side, px</label>
+                <input type="number" id="max-side" min="0" max="20000" step="10" value="1920" aria-describedby="max-side-help">
+                <span class="help" id="max-side-help">0 keeps the original size.</span>
+              </div>
+              <div class="field">
+                <label for="quality">Quality for lossy formats</label>
+                <div class="range-row">
+                  <input type="range" id="quality" min="40" max="95" step="1" value="80">
+                  <output for="quality" id="quality-out">80</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="limit">Size limit per file, KB</label>
+                <input type="number" id="limit" min="0" max="100000" step="10" value="1000" aria-describedby="limit-help">
+                <span class="help" id="limit-help">0 means no limit. 1 MB = 1000 KB.</span>
+              </div>
+              <div class="field"><label for="image-width">Fit within width, px</label><input type="number" id="image-width" min="0" max="20000" value="0"><span class="help">0 = unrestricted. Aspect ratio is preserved; no upscaling.</span></div>
+              <div class="field"><label for="image-height">Fit within height, px</label><input type="number" id="image-height" min="0" max="20000" value="0"></div>
+              <div class="field"><label for="jpeg-bg">JPEG background</label><input type="color" id="jpeg-bg" value="#ffffff"><span class="help">Replaces transparency in JPEG exports.</span></div>
+            </details><button class="btn ghost reset-settings" type="button" id="reset-settings">Reset image settings</button>
+          </form>
+
+          <div class="privacy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+            <p>Private by design: images are processed on your device with the browser's own image codecs. Nothing is uploaded.</p>
+          </div>
+        </div>
+
+        <div class="results">
+          <div class="drop" id="drop">
+            <svg class="drop-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="6" y="8" width="36" height="28" rx="3"/><path d="M10 32l9-11 6 7 4-4 9 8"/><circle cx="33" cy="16" r="3"/><path d="M24 44v-8m-4 4l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="drop-text">
+              <p class="drop-title" id="drop-title">Drop images here or choose files</p>
+              <p class="drop-hint" id="drop-hint">JPG, PNG, WebP, BMP and browser-supported AVIF / HEIC. Animation is not converted.</p>
+            </div>
+            <span class="btn fake-btn" aria-hidden="true">Choose images</span>
+            <input type="file" id="files" multiple accept="image/jpeg,image/png,image/webp,image/gif,image/bmp,image/avif,image/heic,image/heif" aria-labelledby="drop-title" aria-describedby="drop-hint">
+          </div>
+
+          <div class="notice" id="example-notice" hidden>
+            <span>Try the three built-in examples. Adding your own files replaces this demo set.</span>
+          </div>
+
+          <div class="batch-toolbar">
+            <span id="file-count" class="mono">3 images</span>
+            <div class="toolbar-actions">
+              <button class="btn ghost" id="examples" type="button">Load demo</button>
+              <button class="btn ghost" id="export-report" type="button" disabled>Export CSV</button>
+              <button class="btn ghost" id="clear-all" type="button">Clear all</button>
+              <button class="btn ghost" id="cancel" type="button" disabled>Cancel</button>
+            </div>
+          </div>
+          <progress id="batch-progress" value="0" max="3" aria-label="Images processed"></progress>
+          <div id="empty-state" class="empty-state" hidden><h2>Your next image experiment starts here.</h2><p>Add images above or load the demo to compare size and quality.</p></div>
+          <div class="summary" role="group" aria-label="Summary">
+            <div class="stat"><div class="stat-label">Before</div><div class="stat-value" id="sum-before">–</div></div>
+            <div class="stat"><div class="stat-label">After</div><div class="stat-value" id="sum-after">–</div></div>
+            <div class="stat"><div class="stat-label">Saved</div><div class="stat-value good" id="sum-saved">–</div></div>
+            <div class="stat-actions">
+              <button type="button" class="btn" id="download-all" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 4v11m-5-5l5 5 5-5M5 20h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Download all (.zip)
+              </button>
+            </div>
+          </div>
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+
+          <ul class="cards" id="cards" aria-label="Processed images"></ul>
+
+          <h2 class="section-title">How MediaFit decides</h2>
+          <ol class="how">
+            <li><b>Look</b>Is it a photo (many colours, soft details) or a graphic (flat colours, sharp text)? Does it have transparent parts?</li>
+            <li><b>Choose a format</b>Photos try JPEG and WebP and keep the smaller supported candidate. Graphics use PNG to preserve pixels. WebP candidates are labelled as lossy, including at maximum quality.</li>
+            <li><b>Fit the goal</b>Resize to the longest side of your goal. If the file is still over the limit, lower the quality step by step, then the size.</li>
+            <li><b>Check quality</b>Estimate brightness similarity on copies up to 800 px. SSIM does not fully measure colour, transparency or detail lost by resizing. Inspect the preview too.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+<section class="panel" id="panel-video" role="tabpanel" aria-labelledby="tab-video" hidden>
+  <div class="workspace-heading"><div><p class="eyebrow">02 / VIDEO STUDIO</p><h2>Keep the moment. Lose the extra megabytes.</h2><p>Resize, trim and re-encode short clips without uploading your video.</p></div><span class="local-badge">● Local processing</span></div>
+  <div class="video-layout">
+    <form id="video-settings" class="box video-settings">
+      <h3>Export settings</h3>
+      <div class="field"><label for="video-preset">Quick preset</label><select id="video-preset"><option value="balanced">Balanced · 720p</option><option value="small">Small file · 480p</option><option value="quality">High quality · 1080p</option></select></div>
+      <div class="field"><label for="video-format">Output format</label><select id="video-format"></select><span class="help" id="video-codec-note"></span></div>
+      <div class="field"><label for="video-resolution">Fit within</label><select id="video-resolution"><option value="0">Original resolution</option><option value="1080">1920 × 1080 · Full HD</option><option value="720" selected>1280 × 720 · HD</option><option value="480">854 × 480 · SD</option><option value="360">640 × 360 · Compact</option></select><span class="help">Portrait videos use the same bounds rotated. No upscaling.</span></div>
+      <div class="field"><label for="video-bitrate">Video bitrate, Mbps</label><input id="video-bitrate" type="number" min="0.15" max="20" step="0.05" value="1.5"><span class="help">Lower bitrate reduces size and may soften detail.</span></div>
+      <div class="field"><label for="video-fps">Frame rate cap</label><select id="video-fps"><option value="30">30 fps</option><option value="24">24 fps</option><option value="15">15 fps</option></select></div>
+      <fieldset class="trim-fields"><legend>Trim, seconds</legend><div class="two-fields"><label>Start<input id="video-start" type="number" min="0" step="any" value="0"></label><label>End<input id="video-end" type="number" min="0.1" step="any" placeholder="Full clip"></label></div></fieldset>
+      <label class="check-field"><input id="video-mute" type="checkbox"> Remove audio</label>
+      <div class="estimate-box"><span class="eyebrow">ESTIMATED EXPORT</span><strong id="video-estimate">Choose a clip</strong><p id="video-estimate-detail">Bitrate × selected duration; actual size can differ.</p></div>
+      <button class="btn" id="video-compress" type="submit" disabled>Compress video</button><button class="btn ghost" id="video-cancel" type="button" hidden>Cancel processing</button>
+    </form>
+    <div class="video-main">
+      <div class="drop" id="video-drop"><span class="video-drop-icon" aria-hidden="true">▷</span><div class="drop-text"><p class="drop-title" id="video-drop-title">Drop a video or choose a clip</p><p class="drop-hint" id="video-drop-hint">Browser-playable MP4, WebM or MOV. Up to 150 MB and 5 minutes.</p></div><span class="btn fake-btn" aria-hidden="true">Choose video</span><input id="video-file" type="file" accept="video/*,.mp4,.webm,.mov,.m4v" aria-labelledby="video-drop-title" aria-describedby="video-drop-hint"></div>
+      <div class="video-toolbar"><p class="subtle" id="video-support"></p><div><button class="btn ghost" id="video-demo" type="button">Try a demo clip</button><button class="btn ghost" id="video-clear" type="button" disabled>Remove video</button></div></div>
+      <div class="notice video-advice"><span>Processing runs at playback speed. Keep this browser tab in the foreground. Original files stay on your device.</span></div>
+      <div class="video-empty box" id="video-empty"><div class="film-symbol" aria-hidden="true">▶</div><h3>A small clip can tell a big story.</h3><p>Start with a short video. Choose a smaller resolution or bitrate, then compare your export with the original.</p><div class="video-steps"><span>01 Choose</span><span>02 Adjust</span><span>03 Compare</span></div></div>
+      <div class="box" id="video-source-card" hidden><div class="preview-title"><h3>Original clip</h3><span id="video-source-name" class="mono"></span></div><video id="video-source" controls playsinline preload="metadata"></video><dl class="media-metadata" id="video-metadata"></dl></div>
+      <div class="video-progress box" id="video-progress-box" hidden><div class="preview-title"><h3 id="video-phase">Processing</h3><strong id="video-percent">0%</strong></div><progress id="video-progress" value="0" max="100" aria-label="Video processing progress"></progress><p id="video-elapsed" class="subtle"></p></div>
+      <p id="video-status" role="status" aria-live="polite" class="status"></p>
+      <div class="box" id="video-result-card" hidden><div class="preview-title"><div><p class="eyebrow">READY TO DOWNLOAD</p><h3>Your exported clip</h3></div><button class="btn" id="video-download" type="button">Download video</button></div><video id="video-result" controls playsinline preload="metadata"></video><dl class="media-metadata" id="video-result-metadata"></dl><p class="notice" id="video-verdict"></p><div class="toolbar-actions"><button class="btn ghost" id="video-report" type="button">Download report</button><button class="btn ghost" id="video-snapshot" type="button">Save current frame as PNG</button></div></div>
+    </div>
+  </div>
+</section>
+
+    <!-- ================= GUIDE ================= -->
+    <section class="panel" id="panel-guide" role="tabpanel" aria-labelledby="tab-guide" hidden>
+<div class="workspace-heading"><div><p class="eyebrow">03 / FORMAT GUIDE</p><h2>The format is part of the decision.</h2><p>Explore compatibility, quality and file size.</p></div></div>
+      <div class="guide">
+        <div class="box">
+          <fieldset>
+            <legend>What kind of media do you have?</legend>
+            <div class="chips" id="media-choices"></div>
+          </fieldset>
+          <fieldset style="margin-top:1.1rem">
+            <legend>What will you do with it?</legend>
+            <div class="chips" id="purpose-choices"></div>
+          </fieldset>
+        </div>
+
+        <div class="answer" id="answer" aria-live="polite"></div>
+
+        <div class="box" style="grid-column:1 / -1">
+          <h2 style="font-size:1.125rem">How big will the file be?</h2>
+          <p class="help" style="color:var(--muted);font-size:.875rem;margin-top:.25rem">Sound and video size = bitrate × time. Pick a typical bitrate and a length.</p>
+          <div class="calc" style="margin-top:.9rem">
+            <div class="field">
+              <label for="calc-kind">Format and bitrate</label>
+              <select id="calc-kind"></select>
+            </div>
+            <div class="field" style="margin-top:0">
+              <label for="calc-min">Length, minutes</label>
+              <input type="number" id="calc-min" min="0.1" max="600" step="0.5" value="10">
+            </div>
+          </div>
+          <div class="calc-out" aria-live="polite">
+            <span class="big" id="calc-size">–</span>
+            <span class="calc-formula" id="calc-formula"></span>
+            <span class="fits" id="calc-fits"></span>
+          </div>
+        </div>
+
+        <div class="table-wrap" tabindex="0" role="region" aria-labelledby="formats-caption">
+          <table>
+            <caption id="formats-caption">Common multimedia file formats</caption>
+            <thead><tr><th scope="col">Format</th><th scope="col">Compression</th><th scope="col">Best for</th><th scope="col">Watch out</th></tr></thead>
+            <tbody id="formats-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+<section class="panel" id="panel-help" role="tabpanel" aria-labelledby="tab-help" hidden>
+  <div class="workspace-heading"><div><p class="eyebrow">04 / HELP &amp; PROJECT</p><h2>Know what happens to your media.</h2><p>A practical ICT project about compression, codecs and informed choices.</p></div></div>
+  <div class="help-grid"><article class="box privacy-feature"><span class="eyebrow">PRIVATE BY DESIGN</span><h3>Your files stay yours.</h3><p>Images and videos are decoded and encoded on your device. No account, upload service or server storage is used. Closing or reloading the page removes loaded files and results.</p><p>Only preferences are saved locally. Keep copies of your downloads.</p></article><article class="box"><span class="eyebrow">THIS BROWSER</span><h3>Capability check</h3><ul id="capability-list" class="capability-list"></ul></article></div>
+  <div class="help-grid faq-grid"><div class="box"><h3>Using MediaFit</h3>
+    <details open><summary>What is the best way to start?</summary><p>Try the built-in examples. For images, choose your goal and inspect Format lab. Use Edit for individual settings. For video, try Balanced first and compare the measured output size.</p></details>
+    <details><summary>Why did the file get larger?</summary><p>A different format, higher bitrate or resizing a highly optimized graphic can produce a larger file. Image Auto keeps the original when it meets all constraints and is smaller. Video exports show the measured change; keep the original if it is better.</p></details>
+    <details><summary>Does quality 80 mean 80% quality?</summary><p>No. Quality is a setting of a specific encoder. Equal numbers across JPEG and WebP do not imply equal perceptual quality. Compare important details visually.</p></details>
+    <details><summary>What does SSIM measure?</summary><p>Our image estimate compares luminance on resampled copies up to 800 px. It does not fully measure colour, transparency or original-resolution detail. No SSIM score is calculated for video.</p></details>
+  </div><div class="box"><h3>Video &amp; compatibility</h3>
+    <details open><summary>Why does video take time?</summary><p>The browser re-encodes frames while playing the selected portion. A 30-second clip takes roughly 30 seconds plus preparation. Keep this browser tab in the foreground; switching away pauses encoding until you return.</p></details>
+    <details><summary>Can I export MP4?</summary><p>MP4 appears only when your browser supports recording the required codecs. WebM is available in supported browsers. Input playback and output recording have separate compatibility requirements.</p></details>
+    <details><summary>Is the estimated size guaranteed?</summary><p>No. Bitrate is a target; content, encoder behaviour, audio and container overhead affect the final size. Check the measured result before downloading.</p></details>
+    <details><summary>What are the limits?</summary><p>Images: 60 MB and 40 megapixels. Videos: 150 MB, 5 minutes and at most 3840 × 2160 equivalent input pixels. Animation conversion and HDR preservation are not supported. Canvas export can remove metadata and alter colour profiles. Unsupported or encrypted codecs cannot be decoded.</p></details>
+  </div></div>
+  <article class="box project-about"><div><p class="eyebrow">ICT FINAL / GROUP IT-2602</p><h3>From file formats to a working media studio.</h3><p>Shmidt Dmitriy · Azhden Alikhan · Serik Adil</p><p>Built with HTML, CSS and JavaScript, using Canvas, File API, Web Audio and MediaRecorder. The final edition adds video processing, per-image editing, selectable exports and reproducible browser tests.</p></div><div><h4>Technical references</h4><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob" target="_blank" rel="noopener">Canvas encoding ↗</a><a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder" target="_blank" rel="noopener">MediaRecorder ↗</a><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank" rel="noopener">Web Audio ↗</a></div></article>
+</section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>MediaFit Final Edition is a student project by Shmidt Dmitriy, Azhden Alikhan &amp; Serik Adil, Group IT-2602 (ICT Final, 2026).</p>
+    <p>Final improvements: image editing, format lab, private video compression and export reports.</p><p>Example photo: "Ishim River, Astana" by Nikolamikovic82, Wikimedia Commons, CC0. Example screenshot and logo: our own work.</p>
+  </div>
+</footer>
+
+<dialog id="compare" aria-labelledby="cmp-title">
+  <div class="dlg-head">
+    <h2 id="cmp-title">Compare</h2>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <button type="button" class="btn ghost" id="cmp-zoom" aria-pressed="false">Actual pixels (100%)</button>
+      <button type="button" class="btn" id="cmp-close">Close</button>
+    </div>
+  </div>
+  <div class="dlg-body" id="cmp-body">
+    <div class="compare-labels"><span>Original <small id="cmp-a-info"></small></span><span>Result <small id="cmp-b-info"></small></span></div>
+    <div class="compare-viewport" id="compare-viewport" tabindex="0" aria-label="Comparison image. Scroll to inspect at actual size.">
+      <div id="compare-stage" class="compare-stage"><canvas id="cmp-b" role="img" aria-label="Processed image"></canvas><canvas id="cmp-a" role="img" aria-label="Original image overlay"></canvas><span class="compare-divider" aria-hidden="true"></span></div>
+    </div>
+    <label class="slider-label" for="compare-slider">Reveal original <output id="compare-position">50%</output></label>
+    <input id="compare-slider" type="range" min="0" max="100" value="50">
+    <p class="dlg-note">Both images are aligned to the result dimensions. Left: original after any rotation/crop, resampled to this size. Right: encoded result. At 100%, scroll to inspect details. The checkerboard reveals transparency.</p>
+  </div>
+</dialog>
+
+<dialog id="image-editor" aria-labelledby="editor-title">
+  <form id="editor-form"><div class="dlg-head"><div><p class="eyebrow">INDIVIDUAL IMAGE SETTINGS</p><h2 id="editor-title">Edit image</h2></div><button class="btn ghost" id="editor-close" type="button">Close</button></div>
+  <div class="editor-layout dlg-body"><div><div class="editor-preview"><canvas id="editor-preview" aria-label="Preview of rotation and centre crop" role="img"></canvas></div><p class="subtle">Preview shows rotation and centre crop. Fit bounds are applied on export. No upscaling.</p><p id="editor-status" role="status" class="status"></p></div>
+  <div class="editor-fields"><div class="field"><label for="edit-format">Format</label><select id="edit-format"><option value="auto">Auto</option><option value="jpeg">JPEG</option><option value="png">PNG · lossless</option><option value="webp">WebP</option></select></div>
+  <div class="two-fields"><div class="field"><label for="edit-width">Fit width, px</label><input id="edit-width" type="number" min="0" max="20000" value="0"></div><div class="field"><label for="edit-height">Fit height, px</label><input id="edit-height" type="number" min="0" max="20000" value="0"></div></div>
+  <div class="two-fields"><div class="field"><label for="edit-side">Longest side, px</label><input id="edit-side" type="number" min="0" max="20000" value="1920"></div><div class="field"><label for="edit-limit">Size limit, KB</label><input id="edit-limit" type="number" min="0" max="100000" value="1000"></div></div>
+  <div class="field"><label for="edit-quality">Lossy quality <output id="edit-quality-out">80</output></label><input id="edit-quality" type="range" min="40" max="95" value="80"></div>
+  <div class="two-fields"><div class="field"><label for="edit-rotation">Rotate</label><select id="edit-rotation"><option value="0">Original</option><option value="90">90° clockwise</option><option value="180">180°</option><option value="270">90° counterclockwise</option></select></div><div class="field"><label for="edit-crop">Centre crop</label><select id="edit-crop"><option value="0">Original proportions</option><option value="1">Square · 1:1</option><option value="1.3333333333">Landscape · 4:3</option><option value="1.7777777778">Wide · 16:9</option><option value="0.5625">Portrait · 9:16</option></select></div></div>
+  <div class="field"><label for="edit-bg">JPEG background</label><input id="edit-bg" type="color" value="#ffffff"></div><p class="help">0 = no bound / no size limit. Aspect ratio is preserved after cropping. Changes apply to this file only.</p>
+  </div></div><div class="editor-footer"><button id="editor-reset" type="button" class="btn ghost">Use global settings</button><button id="editor-apply" class="btn" type="submit">Apply &amp; process</button></div></form>
+</dialog>
+
+<script src="app.js" defer></script>
+<script src="video.js" defer></script>
+<script src="preferences.js" defer></script>
+</body></html>
+

@@ -1,0 +1,12 @@
+node_modules/
+tmp/
+presentation/
+.chart-data-*/
+*.pptx
+*.pdf
+*.zip
+*-preview.png
+tests/*.mp4
+tests/*.webm
+.DS_Store
+Thumbs.db
