@@ -130,7 +130,7 @@
     source.pause();output.pause();dropResult();setBusy(true);$('#video-progress-box').hidden=false;$('#video-phase').textContent='Preparing encoder';$('#video-progress').value=0;$('#video-percent').textContent='0%';status('Preparing a local export…');
     const engine=document.createElement('video');engine.className='video-engine';engine.muted=true;engine.playsInline=true;engine.preload='auto';document.body.append(engine);
     const canvas=document.createElement('canvas');canvas.width=dims.width;canvas.height=dims.height;const ctx=canvas.getContext('2d',{alpha:false});
-    let stream,audioContext,audioSource,recorder,frameTimer,updateTimer,watchdog,wakeLock,recorderDone,cancelled=false,lastFrame=-1,started=0,pausedAt=0,pauseTotal=0;
+    let stream,audioContext,audioSource,recorder,frameTimer,updateTimer,watchdog,wakeLock,recorderDone,cancelled=false,timedOut=false,lastFrame=-1,started=0,pausedAt=0,pauseTotal=0;
     const resources=[];
     const stop=()=>{engine.pause();if(recorder&&recorder.state!=='inactive')recorder.stop();};
     abort=()=>{cancelled=true;stop();};
@@ -173,7 +173,7 @@
         $('#video-progress').value=percent;$('#video-percent').textContent=percent+'%';
         $('#video-elapsed').textContent=seconds(done)+' / '+seconds(selectedDuration)+' of source · '+dims.width+'×'+dims.height+' px';
       },100);
-      watchdog=setInterval(()=>{const active=(performance.now()-started-pauseTotal-(pausedAt?performance.now()-pausedAt:0))/1000;if(active>selectedDuration*2+30){cancelled=true;stop();status('Processing timed out. Try a shorter clip or lower resolution.');}},1000);
+      watchdog=setInterval(()=>{const active=(performance.now()-started-pauseTotal-(pausedAt?performance.now()-pausedAt:0))/1000;if(active>selectedDuration*2+30){cancelled=true;timedOut=true;stop();}},1000);
       await recorderDone;
       if(cancelled)throw new DOMException('Cancelled','AbortError');
       const encodedDuration=Math.min(selectedDuration,Math.max(.001,engine.currentTime-s.start));
@@ -187,7 +187,7 @@
       $('#video-verdict').className='notice'+(saved>0?' success':'');
       $('#video-verdict').textContent=saved>0?'Export is '+saved+'% smaller than the full original file.'+(s.start>0||s.end<input.duration-.05?' The trim also contributes to this reduction.':''):'Export is '+Math.abs(saved)+'% larger or similar in size. Keep the original, or try a lower bitrate / resolution.';
       status('Export ready. Preview the result and download it. '+(s.mute?'Audio was removed.':'Audio was included; a silent source remains silent.'));
-    }catch(e){if(e.name==='AbortError'){status('Processing cancelled. No partial export was saved.');$('#video-phase').textContent='Cancelled';}else{status(e.message);$('#video-phase').textContent='Export failed';}}
+    }catch(e){if(timedOut){status('Processing timed out. Try a shorter clip or lower resolution.');$('#video-phase').textContent='Timed out';}else if(e.name==='AbortError'){status('Processing cancelled. No partial export was saved.');$('#video-phase').textContent='Cancelled';}else{status(e.message);$('#video-phase').textContent='Export failed';}}
     finally{
       clearInterval(frameTimer);clearInterval(updateTimer);clearInterval(watchdog);document.removeEventListener('visibilitychange',onVisibility);stop();
       if(recorderDone)await recorderDone.catch(()=>{});
